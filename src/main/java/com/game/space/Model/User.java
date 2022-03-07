@@ -1,5 +1,6 @@
 package com.game.space.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -35,10 +36,7 @@ public class User {
 			inverseJoinColumns= {@JoinColumn(name="gameId")})
 	private List<Game> userPlayedGames;
 	
-	
-	
-	public User(long id, String username, String ppic, String fname, String email, String lname, String phash,
-			List<Game> userOwnedGames, List<Game> userLikedGames, List<Game> userPlayedGames) {
+	public User(long id, String username, String ppic, String fname, String email, String lname, String phash) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -47,11 +45,10 @@ public class User {
 		Email = email;
 		this.lname = lname;
 		this.phash = phash;
-		this.userOwnedGames = userOwnedGames;
-		this.userLikedGames = userLikedGames;
-		this.userPlayedGames = userPlayedGames;
+		this.userOwnedGames=new ArrayList<Game>();
+		this.userLikedGames=new ArrayList<Game>();
+		this.userPlayedGames=new ArrayList<Game>();
 	}
-
 	public long getId() {
 		return id;
 	}
