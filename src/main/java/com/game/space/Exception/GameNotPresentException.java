@@ -1,4 +1,4 @@
-package Exception;
+package com.game.space.Exception;
 
 public class GameNotPresentException  extends Exception {
 	

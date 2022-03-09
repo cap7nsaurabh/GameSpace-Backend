@@ -7,11 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.game.space.Exception.GameAlreadyPresentException;
+import com.game.space.Exception.GameNotPresentException;
 import com.game.space.Model.Game;
 import com.game.space.Repository.GameRepo;
-
-import Exception.GameAlreadyPresentException;
-import Exception.GameNotPresentException;
 
 @Service
 public class GameServiceImpl implements GameService {

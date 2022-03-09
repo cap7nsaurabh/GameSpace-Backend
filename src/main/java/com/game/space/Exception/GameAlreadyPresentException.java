@@ -1,4 +1,4 @@
-package Exception;
+package com.game.space.Exception;
 
 import net.bytebuddy.implementation.bind.annotation.Super;
 

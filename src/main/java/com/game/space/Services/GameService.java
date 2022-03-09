@@ -2,10 +2,9 @@ package com.game.space.Services;
 
 import java.util.List;
 
+import com.game.space.Exception.GameAlreadyPresentException;
+import com.game.space.Exception.GameNotPresentException;
 import com.game.space.Model.Game;
-
-import Exception.GameAlreadyPresentException;
-import Exception.GameNotPresentException;
 
 public interface GameService {
 	
