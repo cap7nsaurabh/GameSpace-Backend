@@ -6,11 +6,12 @@ import javax.persistence.*;
 
 @Entity
 public class Game {
-	@Id @GeneratedValue
+	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	private String Uniquename;
 	private String name;
 	private String logo;
-	private String rating;
+	private Integer rating;
 	
 	@ManyToMany(mappedBy="userOwnedGames")
 	private List<User> ownedbyUsers;
@@ -29,10 +30,11 @@ public class Game {
 	
 	
 
-	public Game(long id, String name, String logo, String rating, List<User> ownedbyUsers, List<User> likedbyUsers,
+	public Game( long id,String uniquename, String name, String logo, Integer rating, List<User> ownedbyUsers, List<User> likedbyUsers,
 			List<User> playedbyUsers, List<Comment> gameComment) {
 		super();
 		this.id = id;
+		this.Uniquename=uniquename;
 		this.name = name;
 		this.logo = logo;
 		this.rating = rating;
@@ -41,7 +43,14 @@ public class Game {
 		this.playedbyUsers = playedbyUsers;
 		this.gameComment = gameComment;
 	}
+	
+	public String getUniquename() {
+		return Uniquename;
+	}
 
+	public void setUniquename(String uniquename) {
+		Uniquename = uniquename;
+	}
 	public long getId() {
 		return id;
 	}
@@ -66,11 +75,11 @@ public class Game {
 		this.logo = logo;
 	}
 
-	public String getRating() {
+	public Integer getRating() {
 		return rating;
 	}
 
-	public void setRating(String rating) {
+	public void setRating(Integer rating) {
 		this.rating = rating;
 	}
 

@@ -8,5 +8,5 @@ import com.game.space.Model.User;
 
 @Repository
 public interface GameRepo extends JpaRepository<Game,Long>  {
-
+	Game findByUniquename(String name);
 }
