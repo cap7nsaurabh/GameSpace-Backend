@@ -8,6 +8,7 @@ import javax.persistence.*;
 public class Game {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	@Column(nullable=false,unique=true) 
 	private String Uniquename;
 	private String name;
 	private String logo;
@@ -30,18 +31,11 @@ public class Game {
 	
 	
 
-	public Game( long id,String uniquename, String name, String logo, Integer rating, List<User> ownedbyUsers, List<User> likedbyUsers,
-			List<User> playedbyUsers, List<Comment> gameComment) {
+	public Game(String uniquename, String name, String logo) {
 		super();
-		this.id = id;
-		this.Uniquename=uniquename;
+		Uniquename = uniquename;
 		this.name = name;
 		this.logo = logo;
-		this.rating = rating;
-		this.ownedbyUsers = ownedbyUsers;
-		this.likedbyUsers = likedbyUsers;
-		this.playedbyUsers = playedbyUsers;
-		this.gameComment = gameComment;
 	}
 	
 	public String getUniquename() {

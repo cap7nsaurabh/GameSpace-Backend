@@ -3,22 +3,20 @@ package com.game.space.Model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.*;
 
 @Entity
 public class User {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	@Column(nullable=false,unique=true) 
 	private String username;
 	private String ppic;
 	private String fname;
+	@Column(nullable=false,unique=true) 
 	private String Email;
 	private String lname;
+	@Column(nullable=false,unique=true) 
 	private String phash;
 	@ManyToMany
 	@JoinTable(name="user_owned_games",
