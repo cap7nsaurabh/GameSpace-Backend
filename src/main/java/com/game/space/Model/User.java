@@ -2,6 +2,7 @@ package com.game.space.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -14,38 +15,41 @@ public class User {
 	private String ppic;
 	private String fname;
 	@Column(nullable=false,unique=true) 
-	private String Email;
+	private String email;
 	private String lname;
 	@Column(nullable=false,unique=true) 
 	private String phash;
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name="user_owned_games",
 			joinColumns= {@JoinColumn(name="userId")},
 			inverseJoinColumns= {@JoinColumn(name="gameId")})
 	private List<Game> userOwnedGames;
 	
+	@JsonIgnore
+	@ManyToMany
 	@JoinTable(name="user_liked_games",
 			joinColumns= {@JoinColumn(name="userId")},
 			inverseJoinColumns= {@JoinColumn(name="gameId")})
 	private List<Game> userLikedGames;
-	
+	@JsonIgnore
+	@ManyToMany
 	@JoinTable(name="user_played_games",
 			joinColumns= {@JoinColumn(name="userId")},
 			inverseJoinColumns= {@JoinColumn(name="gameId")})
 	private List<Game> userPlayedGames;
 	
-	public User(long id, String username, String ppic, String fname, String email, String lname, String phash) {
+	public User() {
 		super();
-		this.id = id;
+	}
+	public User(String username, String ppic, String fname, String email, String lname, String phash) {
+		super();
 		this.username = username;
 		this.ppic = ppic;
 		this.fname = fname;
-		Email = email;
+		this.email = email;
 		this.lname = lname;
 		this.phash = phash;
-		this.userOwnedGames=new ArrayList<Game>();
-		this.userLikedGames=new ArrayList<Game>();
-		this.userPlayedGames=new ArrayList<Game>();
 	}
 	public long getId() {
 		return id;
@@ -82,11 +86,11 @@ public class User {
 	}
 
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 
 	public String getLname() {
@@ -128,13 +132,13 @@ public class User {
 	public void setUserPlayedGames(List<Game> userPlayedGames) {
 		this.userPlayedGames = userPlayedGames;
 	}
-
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", fname=" + fname + ", Email=" + Email + ", lname="
-				+ lname + ", phash=" + phash + ", userOwnedGames=" + userOwnedGames + ", userLikedGames="
-				+ userLikedGames + ", userPlayedGames=" + userPlayedGames + "]";
+		return "User [username=" + username + ", ppic=" + ppic + ", fname=" + fname + ", email=" + email + ", lname="
+				+ lname + ", phash=" + phash + "]";
 	}
+
+
 	
 
 	

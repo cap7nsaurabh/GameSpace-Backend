@@ -16,6 +16,7 @@ import com.game.space.Repository.GameRepo;
 public class GameServiceImpl implements GameService {
 	@Autowired
 	GameRepo gameRepo;
+	
 	public List<Game> getAllGames(){
 		List<Game> gamesList=new ArrayList();
 		gamesList=gameRepo.findAll();

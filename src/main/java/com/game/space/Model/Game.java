@@ -9,20 +9,20 @@ public class Game {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column(nullable=false,unique=true) 
-	private String Uniquename;
+	private String uniquename;
 	private String name;
 	private String logo;
 	private Integer rating;
 	
 	@ManyToMany(mappedBy="userOwnedGames")
 	private List<User> ownedbyUsers;
-	
+
 	@ManyToMany(mappedBy="userLikedGames")
 	private List<User> likedbyUsers;
 	
 	@ManyToMany(mappedBy="userPlayedGames")
 	private List<User> playedbyUsers;
-	
+
 	@ManyToMany
 	@JoinTable(name="Game_Comments",
 			joinColumns= {@JoinColumn(name="gameId")},
@@ -30,20 +30,22 @@ public class Game {
 	private List<Comment> gameComment;
 	
 	
-
+	public Game() {
+		super();
+	}
 	public Game(String uniquename, String name, String logo) {
 		super();
-		Uniquename = uniquename;
+		this.uniquename = uniquename;
 		this.name = name;
 		this.logo = logo;
 	}
 	
 	public String getUniquename() {
-		return Uniquename;
+		return uniquename;
 	}
 
-	public void setUniquename(String uniquename) {
-		Uniquename = uniquename;
+	public void setUniquename(String Uniquename) {
+		this.uniquename = Uniquename;
 	}
 	public long getId() {
 		return id;
@@ -93,6 +95,7 @@ public class Game {
 		this.likedbyUsers = likedbyUsers;
 	}
 
+	
 	public List<User> getPlayedbyUsers() {
 		return playedbyUsers;
 	}
