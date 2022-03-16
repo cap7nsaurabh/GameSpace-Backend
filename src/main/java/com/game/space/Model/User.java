@@ -118,6 +118,7 @@ public class User {
 	}
 
 	public List<Game> getUserLikedGames() {
+		
 		return userLikedGames;
 	}
 
