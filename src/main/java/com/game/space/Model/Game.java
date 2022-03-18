@@ -23,11 +23,9 @@ public class Game {
 	@ManyToMany(mappedBy="userPlayedGames")
 	private List<User> playedbyUsers;
 
-	@ManyToMany
-	@JoinTable(name="Game_Comments",
-			joinColumns= {@JoinColumn(name="gameId")},
-			inverseJoinColumns= {@JoinColumn(name="commentID")})
-	private List<Comment> gameComment;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="Comment_id")
+	private List<Comment> gameComments;
 	
 	
 	public Game() {
@@ -104,12 +102,12 @@ public class Game {
 		this.playedbyUsers = playedbyUsers;
 	}
 
-	public List<Comment> getGameComment() {
-		return gameComment;
+	public List<Comment> getGameComments() {
+		return gameComments;
 	}
 
-	public void setGameComment(List<Comment> gameComment) {
-		this.gameComment = gameComment;
+	public void setGameComment(List<Comment> gameComments) {
+		this.gameComments = gameComments;
 	}
 
 }
