@@ -1,6 +1,7 @@
 package com.game.space.Controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import com.game.space.Services.UserServiceImpl;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-	private ResponseEntity<?> responseEntity;
+	ResponseEntity<?> responseEntity;
 	@Autowired
 	UserServiceImpl userService;
 	
@@ -29,21 +30,28 @@ public class UserController {
 	public ResponseEntity<?> registerUser(@RequestBody User user){
 		//System.out.print("88888888888888888888888888888888888888888888888888888888888888888888888888888888888888");
 		//System.out.print(user.toString());
+		HashMap<String,String> respBody=new HashMap<String,String>();
 		try {
 			userService.saveUser(user);
-			this.responseEntity = new ResponseEntity<>(user, HttpStatus.CREATED);
+			responseEntity = new ResponseEntity<>(user, HttpStatus.CREATED);
 		}
 		catch(UsernameNotGivenException e) {
-			this.responseEntity = new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+			String message=e.getMessage();
+			respBody.put("message",message);
+			responseEntity = new ResponseEntity<>(respBody, HttpStatus.BAD_REQUEST);
 			
 		}
 		catch(EmailNotGivenException e) {
-			this.responseEntity = new ResponseEntity<>(user, HttpStatus.BAD_REQUEST);
+			String message=e.getMessage();
+			respBody.put("message",message);
+			responseEntity = new ResponseEntity<>(respBody, HttpStatus.BAD_REQUEST);
 		}
 		catch(UserExistException e) {
-			this.responseEntity = new ResponseEntity<>(user, HttpStatus.CONFLICT);
+			String message=e.getMessage();
+			respBody.put("message",message);
+			responseEntity = new ResponseEntity<>(respBody, HttpStatus.CONFLICT);
 		}
-		return this.responseEntity;
+		return responseEntity;
 		
 	}
 	@GetMapping("/getall")
@@ -53,6 +61,7 @@ public class UserController {
 		responseEntity =new  ResponseEntity<>(newList,HttpStatus.ACCEPTED);
 		return responseEntity;
 	}
+	
 	
 
 }
