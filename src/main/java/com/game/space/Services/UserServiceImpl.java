@@ -12,7 +12,7 @@ import com.game.space.Exception.UserExistException;
 import com.game.space.Exception.UserNotExistException;
 import com.game.space.Exception.UserPassNotMatchException;
 import com.game.space.Exception.UsernameNotGivenException;
-import com.game.space.Mappers.UserMapper;
+import com.game.space.Utils.UserMapper;
 import com.game.space.Model.User;
 
 @Service
@@ -20,8 +20,6 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	UserRepo userRepo;
 	
-	@Autowired
-	UserMapper mapper;
 
 	@Override
 	public List<User> getAllUsers() {
@@ -69,32 +67,32 @@ public class UserServiceImpl implements UserService{
 		return newUser;
 	}
 
-	@Override
-	public User updateUser(User user) throws UserNotExistException, UserExistException {
-		if(user.getId()==null||user.getUsername()==null||user.getEmail()==null||user.getId().isBlank()||user.getUsername().isBlank()||user.getEmail().isBlank()) {
-			throw new UserNotExistException("can't find user");
-		}
-		User newUser=userRepo.getById(user.getId());
-		List<User> sameEmail=new ArrayList<User>();
-		sameEmail=userRepo.findAllByEmail(user.getEmail());
-		List<User> sameUsername=new ArrayList<User>();
-		sameUsername=userRepo.findAllByUsername(user.getUsername());
-		if(sameUsername.size()>1) {
-			throw new UserExistException("Username not available/ Already Taken");
-		}
-		else if(sameEmail.size()>1){
-			throw new UserExistException("Email not available/ Already Taken");
-		}
-		
-		if(newUser==null) {
-			throw new UserNotExistException("user does not exist");
-		}
-		else{
-			mapper.updateUserFromDto(user,newUser);
-		}
-		User newUser1=userRepo.getById(user.getId());
-		return newUser1;
-	}
+//	@Override
+//	public User updateUser(User user) throws UserNotExistException, UserExistException {
+//		if(user.getId()==null||user.getUsername()==null||user.getEmail()==null||user.getId().isBlank()||user.getUsername().isBlank()||user.getEmail().isBlank()) {
+//			throw new UserNotExistException("can't find user");
+//		}
+//		User newUser=userRepo.getById(user.getId());
+//		List<User> sameEmail=new ArrayList<User>();
+//		sameEmail=userRepo.findAllByEmail(user.getEmail());
+//		List<User> sameUsername=new ArrayList<User>();
+//		sameUsername=userRepo.findAllByUsername(user.getUsername());
+//		if(sameUsername.size()>1) {
+//			throw new UserExistException("Username not available/ Already Taken");
+//		}
+//		else if(sameEmail.size()>1){
+//			throw new UserExistException("Email not available/ Already Taken");
+//		}
+//		
+//		if(newUser==null) {
+//			throw new UserNotExistException("user does not exist");
+//		}
+//		else{
+//			
+//		}
+//		User newUser1=userRepo.getById(user.getId());
+//		return newUser1;
+//	}
 
 	@Override
 	public User getUser(String id) throws UserNotExistException {

@@ -17,7 +17,6 @@ public class User {
 	@Column(nullable=false,unique=true) 
 	private String email;
 	private String lname;
-	@Column(nullable=false,unique=true) 
 	private String phash;
 	@JsonIgnore
 	@ManyToMany
@@ -138,6 +137,8 @@ public class User {
 		return "User [username=" + username + ", ppic=" + ppic + ", fname=" + fname + ", email=" + email + ", lname="
 				+ lname + ", phash=" + phash + "]";
 	}
+	
+	
 
 
 	

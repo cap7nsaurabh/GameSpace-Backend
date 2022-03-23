@@ -1,4 +1,4 @@
-package com.game.space.Mappers;
+package com.game.space.Utils;
 
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
