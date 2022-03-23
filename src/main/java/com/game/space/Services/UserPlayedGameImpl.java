@@ -26,7 +26,7 @@ public class UserPlayedGameImpl implements UserPlayedGame {
 	GameServiceImpl gameService;
 
 	@Override
-	public List<Game> getUserplayedGames(long userId) throws UserNotExistException {
+	public List<Game> getUserplayedGames(String userId) throws UserNotExistException {
 		User newUser=userService.getUser(userId);
 		List<Game> userGames;
 		if(newUser.getUserPlayedGames()==null) {
@@ -39,7 +39,7 @@ public class UserPlayedGameImpl implements UserPlayedGame {
 	}
 
 	@Override
-	public Game addGameToUserplayed(Long gameId, long userId) throws UserNotExistException, GameNotPresentException, GameAlreadyPresentInplayedListException {
+	public Game addGameToUserplayed(String gameId, String userId) throws UserNotExistException, GameNotPresentException, GameAlreadyPresentInplayedListException {
 		User newUser=userService.getUser(userId);
 		List<Game> userGames;
 		Game newGame=gameService.getGameByid(gameId);
@@ -59,7 +59,7 @@ public class UserPlayedGameImpl implements UserPlayedGame {
 	}
 
 	@Override
-	public Game deleteFromUserplayed(long gameId, long userId) throws UserNotExistException, GameNotPresentException, GameNotInUserplayed {
+	public Game deleteFromUserplayed(String gameId, String userId) throws UserNotExistException, GameNotPresentException, GameNotInUserplayed {
 		User newUser=userService.getUser(userId);
 		List<Game> userGames;
 		Game newGame=gameService.getGameByid(gameId);
@@ -80,7 +80,7 @@ public class UserPlayedGameImpl implements UserPlayedGame {
 	}
 
 	@Override
-	public Boolean checkIfplays(long gameId, long userId) throws UserNotExistException, GameNotPresentException {
+	public Boolean checkIfplays(String gameId, String userId) throws UserNotExistException, GameNotPresentException {
 		User newUser=userService.getUser(userId);
 		List<Game> userGames;
 		Game newGame=gameService.getGameByid(gameId);

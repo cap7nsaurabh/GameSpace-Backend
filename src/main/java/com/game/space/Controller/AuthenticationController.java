@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.game.space.Exception.IncompleteDataException;
 import com.game.space.Exception.UserNotExistException;
 import com.game.space.Exception.UserPassNotMatchException;
 import com.game.space.Model.User;
@@ -55,6 +56,12 @@ public class AuthenticationController {
 				String message=e.getMessage();
 				map.put("message", message);
 				responseEntity=new ResponseEntity<>(map,HttpStatus.UNAUTHORIZED);
+				e.printStackTrace();
+			}
+			catch(IncompleteDataException e) {
+				String message=e.getMessage();
+				map.put("message", message);
+				responseEntity=new ResponseEntity<>(map,HttpStatus.BAD_REQUEST);
 				e.printStackTrace();
 			}
 		}

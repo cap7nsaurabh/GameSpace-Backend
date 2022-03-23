@@ -34,7 +34,7 @@ public class GameServiceImpl implements GameService {
 		return game;
 	}
 	@Override
-	public Game deleteGame(Long id) throws GameNotPresentException {
+	public Game deleteGame(String id) throws GameNotPresentException {
 		Game game=gameRepo.getById(id);
 		if(game==null) {
 			throw new GameNotPresentException("Game not present");
@@ -55,15 +55,15 @@ public class GameServiceImpl implements GameService {
 		return game;
 	}
 	@Override
-	public Game getGameByid(Long id) throws GameNotPresentException {
-		Game game=gameRepo.getById(id);
+	public Game getGameByid(String gameId) throws GameNotPresentException {
+		Game game=gameRepo.getById(gameId);
 		if(game==null) {
 			throw new GameNotPresentException("game not present");
 		}
 		return game;
 	}
 	@Override
-	public Integer getGameRatingByid(Long id) throws GameNotPresentException {
+	public Integer getGameRatingByid(String id) throws GameNotPresentException {
 		Game game=gameRepo.getById(id);
 		if(game==null) {
 			throw new GameNotPresentException("game not present");

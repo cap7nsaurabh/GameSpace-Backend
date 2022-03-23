@@ -14,13 +14,13 @@ import javax.persistence.OneToOne;
 public class Comment {
 	 
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	private	Long id;
+	private	String id;
 	@Column(nullable=false) 
-	private Long commentByUserid;
+	private String commentByUserid;
 	private String commentval;
 	
 	
-	public Comment(Long commentByUserid, String commentval) {
+	public Comment(String commentByUserid, String commentval) {
 		super();
 		this.commentByUserid = commentByUserid;
 		this.commentval = commentval;
@@ -29,16 +29,16 @@ public class Comment {
 		super();
 	}
 	
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public Long getCommentByUserid() {
+	public String getCommentByUserid() {
 		return commentByUserid;
 	}
-	public void setCommentBy(Long commentBy) {
+	public void setCommentBy(String commentBy) {
 		this.commentByUserid = commentBy;
 	}
 	public String getCommentval() {

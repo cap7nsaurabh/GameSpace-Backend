@@ -23,7 +23,7 @@ public class UserOwnedGamesImpl implements UserOwnedGames {
 	GameServiceImpl gameService;
 
 	@Override
-	public List<Game> getUserOwnedGames(long userId) throws UserNotExistException {
+	public List<Game> getUserOwnedGames(String userId) throws UserNotExistException {
 		User newUser=userService.getUser(userId);
 		List<Game> userGames;
 		if(newUser.getUserOwnedGames()==null) {
@@ -36,7 +36,7 @@ public class UserOwnedGamesImpl implements UserOwnedGames {
 	}
 
 	@Override
-	public Game addGameToUserOwned(Long gameId, long userId) throws UserNotExistException, GameNotPresentException, GameAlreadyPresentInOwnedListException {
+	public Game addGameToUserOwned(String gameId, String userId) throws UserNotExistException, GameNotPresentException, GameAlreadyPresentInOwnedListException {
 		User newUser=userService.getUser(userId);
 		List<Game> userGames;
 		Game newGame=gameService.getGameByid(gameId);
@@ -56,7 +56,7 @@ public class UserOwnedGamesImpl implements UserOwnedGames {
 	}
 
 	@Override
-	public Game deleteFromUserOwned(long gameId, long userId) throws UserNotExistException, GameNotPresentException, GameNotInUserOwned {
+	public Game deleteFromUserOwned(String gameId, String userId) throws UserNotExistException, GameNotPresentException, GameNotInUserOwned {
 		User newUser=userService.getUser(userId);
 		List<Game> userGames;
 		Game newGame=gameService.getGameByid(gameId);
@@ -77,7 +77,7 @@ public class UserOwnedGamesImpl implements UserOwnedGames {
 	}
 
 	@Override
-	public Boolean checkIfOwns(long gameId, long userId) throws UserNotExistException, GameNotPresentException {
+	public Boolean checkIfOwns(String gameId, String userId) throws UserNotExistException, GameNotPresentException {
 		User newUser=userService.getUser(userId);
 		List<Game> userGames;
 		Game newGame=gameService.getGameByid(gameId);

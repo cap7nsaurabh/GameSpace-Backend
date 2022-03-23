@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 public class Game {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private String id;
 	@Column(nullable=false,unique=true) 
 	private String uniquename;
 	private String name;
@@ -45,11 +45,11 @@ public class Game {
 	public void setUniquename(String Uniquename) {
 		this.uniquename = Uniquename;
 	}
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

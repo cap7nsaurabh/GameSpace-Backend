@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.game.space.Model.Comment;
 
 @Repository
-public interface CommentRepo extends JpaRepository<Comment,Long>{
-	public List<Comment> findAllByCommentByUserid(long userId);
+public interface CommentRepo extends JpaRepository<Comment,String>{
+	public List<Comment> findAllByCommentByUserid(String userId);
 
 }

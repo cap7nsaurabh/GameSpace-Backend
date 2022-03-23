@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 public class User {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private String id;
 	@Column(nullable=false,unique=true) 
 	private String username;
 	private String ppic;
@@ -51,11 +51,11 @@ public class User {
 		this.lname = lname;
 		this.phash = phash;
 	}
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

@@ -10,8 +10,8 @@ import com.game.space.Exception.UserNotExistException;
 import com.game.space.Model.Comment;
 
 public interface CommentService {
-	public List<Comment> getAllCommentsByGameId(long gameId) throws GameNotPresentException;
-	public Comment addComment(Comment comment,long gameId) throws GameNotPresentException, UserNotExistException, CommentUserDataAbsentException;
-	public Comment deleteComment(long CommentId,long gameId) throws GameNotPresentException, GameHasNoCommentException, CommentNotExistException;
-	public Comment editComment(Comment comment,long gameId);
+	public List<Comment> getAllCommentsByGameId(String gameId) throws GameNotPresentException;
+	public Comment addComment(Comment comment,String gameId) throws GameNotPresentException, UserNotExistException, CommentUserDataAbsentException;
+	public Comment deleteComment(String CommentId,String gameId) throws GameNotPresentException, GameHasNoCommentException, CommentNotExistException;
+	public Comment editComment(Comment comment,String gameId);
 }
