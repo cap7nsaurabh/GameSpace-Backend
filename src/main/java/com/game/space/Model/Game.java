@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class Game {
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
+	@Id  @GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	@Column(nullable=false,unique=true) 
 	private String uniquename;
 	private String name;
@@ -45,11 +47,11 @@ public class Game {
 	public void setUniquename(String Uniquename) {
 		this.uniquename = Uniquename;
 	}
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

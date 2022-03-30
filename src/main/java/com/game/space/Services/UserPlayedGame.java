@@ -9,8 +9,8 @@ import com.game.space.Exception.UserNotExistException;
 import com.game.space.Model.Game;
 
 public interface UserPlayedGame {
-	public List<Game> getUserplayedGames(String userId) throws UserNotExistException;
-	public Game addGameToUserplayed(String gameId,String userId) throws UserNotExistException, GameNotPresentException, GameAlreadyPresentInplayedListException;
-	public Game deleteFromUserplayed(String gameId,String userId) throws UserNotExistException, GameNotPresentException, GameNotInUserplayed;
-	public Boolean checkIfplays(String gameId,String userId) throws UserNotExistException, GameNotPresentException;
+	public List<Game> getUserplayedGames(long userId) throws UserNotExistException;
+	public Game addGameToUserplayed(long gameId,long userId) throws UserNotExistException, GameNotPresentException, GameAlreadyPresentInplayedListException;
+	public Game deleteFromUserplayed(long gameId,long userId) throws UserNotExistException, GameNotPresentException, GameNotInUserplayed;
+	public Boolean checkIfplays(long gameId,long userId) throws UserNotExistException, GameNotPresentException;
 }

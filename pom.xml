@@ -32,12 +32,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
-<dependency>
-    <groupId>org.mapstruct</groupId>
-    <artifactId>mapstruct</artifactId>
-    <version>1.4.2.Final</version>
-</dependency>
+		
 		
 		
 		
@@ -77,11 +72,7 @@
 			<optional>true</optional>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct-processor -->
-<dependency>
-    <groupId>org.mapstruct</groupId>
-    <artifactId>mapstruct-processor</artifactId>
-    <version>1.4.2.Final</version>
-</dependency>
+
 		
 		
 		
@@ -121,24 +112,6 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-              
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                
-                    <annotationProcessorPaths>
-                       <path>
-                           <groupId>org.mapstruct</groupId>
-                           <artifactId>mapstruct-processor</artifactId>
-                           <version>1.4.2.Final</version>
-                       </path>
-                   </annotationProcessorPaths>
-                  
-               </configuration>
-           </plugin>
 		</plugins>
 	</build>
 

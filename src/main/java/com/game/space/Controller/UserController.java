@@ -37,9 +37,10 @@ public class UserController {
 		//System.out.print("88888888888888888888888888888888888888888888888888888888888888888888888888888888888888");
 		//System.out.print(user.toString());
 		HashMap<String,String> respBody=new HashMap<String,String>();
+		User letUser;
 		try {
-			userService.saveUser(user);
-			responseEntity = new ResponseEntity<>(user, HttpStatus.CREATED);
+			letUser=userService.saveUser(user);
+			responseEntity = new ResponseEntity<>(letUser, HttpStatus.CREATED);
 		}
 		catch(UsernameNotGivenException e) {
 			String message=e.getMessage();
@@ -62,32 +63,37 @@ public class UserController {
 			responseEntity = new ResponseEntity<>(respBody, HttpStatus.BAD_REQUEST);
 		}
 		return responseEntity;
-		
 	}
 	@GetMapping("/getall")
 	public ResponseEntity<?>getAllUser(){
-		HashMap<String,String> respBody=new HashMap<String,String>();
 		List<User> newList=new ArrayList<User>();
 		newList=userService.getAllUsers();
 		responseEntity =new  ResponseEntity<>(newList,HttpStatus.ACCEPTED);
 		return responseEntity;
 	}
-	@PutMapping("/updateuser/")
-	public ResponseEntity<?>updateUser(@RequestBody User user) {
+	@PutMapping("/updateuser/username/{userId}")
+	public ResponseEntity<?> updateUserUsername(@RequestBody User user,@PathVariable String userId) {
 		HashMap<String,String> respBody=new HashMap<String,String>();
-		//long useridint=Integer.parseInt(userid);
+		User letUser=new User();
+		long userID;
 		try {
-			User letUser=userService.updateUser(user);
-			responseEntity=new ResponseEntity<>(letUser,HttpStatus.ACCEPTED);
+			userID=Integer.parseInt(userId);
+			letUser=userService.UpdateUserUsername(user,userID);
+			System.out.print(letUser.toString());
+			responseEntity = new ResponseEntity<>(letUser, HttpStatus.ACCEPTED);
+			System.out.println("456");
+		} catch (UserExistException | UsernameNotGivenException | UserNotExistException e) {
+			System.out.println("789");
+			String message=e.getMessage();
+			respBody.put("message",message);
+			responseEntity = new ResponseEntity<>(respBody, HttpStatus.BAD_REQUEST);
+			System.out.println("012");
 		}
-		catch(UserNotExistException e) {
-			respBody.put("message", e.getMessage());
-			responseEntity=new ResponseEntity<>(respBody,HttpStatus.BAD_REQUEST);
+		catch(NullPointerException|NumberFormatException e) {
+			respBody.put("message","illegal id format");
+			responseEntity = new ResponseEntity<>(respBody, HttpStatus.BAD_REQUEST);
 		}
-		catch(UserExistException e) {
-			respBody.put("message", e.getMessage());
-			responseEntity=new ResponseEntity<>(respBody,HttpStatus.BAD_REQUEST);
-		}
+		System.out.println("response me dikkat chhe");
 		return responseEntity;
 	}
 	

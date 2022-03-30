@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.game.space.Model.User;
 
 @Repository
-public interface UserRepo extends JpaRepository<User,String> {
+public interface UserRepo extends JpaRepository<User,Long> {
 	User findByUsername(String username);
 	User findByEmail(String email);
 	List<User>findAllByUsername(String username);

@@ -25,7 +25,7 @@ public class GameServiceImpl implements GameService {
 	@Override
 	public Game addGame(Game game) throws GameAlreadyPresentException {
 		Game game1=gameRepo.findByUniquename(game.getUniquename());
-		if(game!=null) {
+		if(game1!=null) {
 			throw new GameAlreadyPresentException("Game already present");
 		}
 		else {
@@ -34,19 +34,19 @@ public class GameServiceImpl implements GameService {
 		return game;
 	}
 	@Override
-	public Game deleteGame(String id) throws GameNotPresentException {
-		Game game=gameRepo.getById(id);
+	public Game deleteGame(long gameId) throws GameNotPresentException {
+		Game game=gameRepo.findById(gameId).get();
 		if(game==null) {
 			throw new GameNotPresentException("Game not present");
 		}
 		else {
-			gameRepo.deleteById(id);
+			gameRepo.deleteById(gameId);
 		}
 		return game;
 	}
 	@Override
 	public Game updateGame(Game game) throws GameNotPresentException {
-		if(gameRepo.findById(game.getId())==null) {
+		if(gameRepo.findById(game.getId()).get()==null) {
 			throw new GameNotPresentException("Game not present");
 		}
 		else {
@@ -55,16 +55,16 @@ public class GameServiceImpl implements GameService {
 		return game;
 	}
 	@Override
-	public Game getGameByid(String gameId) throws GameNotPresentException {
-		Game game=gameRepo.getById(gameId);
+	public Game getGameByid(long gameId) throws GameNotPresentException {
+		Game game=gameRepo.findById(gameId).get();
 		if(game==null) {
 			throw new GameNotPresentException("game not present");
 		}
 		return game;
 	}
 	@Override
-	public Integer getGameRatingByid(String id) throws GameNotPresentException {
-		Game game=gameRepo.getById(id);
+	public Integer getGameRatingByid(long gameId) throws GameNotPresentException {
+		Game game=gameRepo.findById(gameId).get();
 		if(game==null) {
 			throw new GameNotPresentException("game not present");
 		}

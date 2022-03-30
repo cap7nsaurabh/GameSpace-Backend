@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.game.space.Model.Game;
 
 @Repository
-public interface GameRepo extends JpaRepository<Game,String>  {
+public interface GameRepo extends JpaRepository<Game,Long>  {
 	Game findByUniquename(String name);
 }

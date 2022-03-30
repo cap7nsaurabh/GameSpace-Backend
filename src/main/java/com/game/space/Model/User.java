@@ -6,10 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class User {
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
+	@Id  @GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	@Column(nullable=false,unique=true) 
 	private String username;
 	private String ppic;
@@ -50,11 +52,11 @@ public class User {
 		this.lname = lname;
 		this.phash = phash;
 	}
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

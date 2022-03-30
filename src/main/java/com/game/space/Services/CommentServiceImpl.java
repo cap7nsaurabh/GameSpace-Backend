@@ -27,7 +27,7 @@ public class CommentServiceImpl implements CommentService{
 	UserRepo userRepo;
 	
 	@Override
-	public List<Comment> getAllCommentsByGameId(String gameId) throws GameNotPresentException {
+	public List<Comment> getAllCommentsByGameId(long gameId) throws GameNotPresentException {
 		Game newGame=gameService.getGameByid(gameId);
 		List<Comment> commentList=new ArrayList<Comment>();
 		commentList=newGame.getGameComments();
@@ -35,12 +35,9 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public Comment addComment(Comment comment, String gameId) throws GameNotPresentException, UserNotExistException, CommentUserDataAbsentException {
+	public Comment addComment(Comment comment, long gameId) throws GameNotPresentException, UserNotExistException, CommentUserDataAbsentException {
 		Game newGame=gameService.getGameByid(gameId);
-		if(comment.getCommentByUserid()==null) {
-			throw new CommentUserDataAbsentException("comment should have a user");
-		}
-		else if(userRepo.findById(comment.getCommentByUserid())==null) {
+		if(userRepo.findById(comment.getCommentedByUserid())==null) {
 			throw new UserNotExistException("comment should have a valid user");
 		}
 		List<Comment> commentList=newGame.getGameComments();
@@ -53,7 +50,7 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public Comment deleteComment(String commentId, String gameId) throws GameNotPresentException, GameHasNoCommentException, CommentNotExistException {
+	public Comment deleteComment(long commentId, long gameId) throws GameNotPresentException, GameHasNoCommentException, CommentNotExistException {
 		Game newGame=gameService.getGameByid(gameId);
 		List<Comment> commentList=newGame.getGameComments();
 		Comment comment=commentRepo.getById(commentId);
@@ -75,7 +72,7 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public Comment editComment(Comment comment, String gameId) {
+	public Comment editComment(Comment comment, long gameId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

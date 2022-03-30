@@ -12,7 +12,6 @@ import com.game.space.Exception.UserExistException;
 import com.game.space.Exception.UserNotExistException;
 import com.game.space.Exception.UserPassNotMatchException;
 import com.game.space.Exception.UsernameNotGivenException;
-import com.game.space.Utils.UserMapper;
 import com.game.space.Model.User;
 
 @Service
@@ -52,12 +51,13 @@ public class UserServiceImpl implements UserService{
 		else {
 			throw new UserExistException("User already exist");
 		}
-		return newUser;
+		User letUser=userRepo.findByUsername(user.getUsername());
+		return letUser;
 	}
 
 	@Override
-	public User deleteUser(String id) throws UserNotExistException {
-		User newUser=userRepo.getById(id);
+	public User deleteUser(long userId) throws UserNotExistException {
+		User newUser=userRepo.findById(userId).get();
 		if(newUser==null) {
 			throw new UserNotExistException("user does not exist");
 		}
@@ -67,36 +67,11 @@ public class UserServiceImpl implements UserService{
 		return newUser;
 	}
 
-//	@Override
-//	public User updateUser(User user) throws UserNotExistException, UserExistException {
-//		if(user.getId()==null||user.getUsername()==null||user.getEmail()==null||user.getId().isBlank()||user.getUsername().isBlank()||user.getEmail().isBlank()) {
-//			throw new UserNotExistException("can't find user");
-//		}
-//		User newUser=userRepo.getById(user.getId());
-//		List<User> sameEmail=new ArrayList<User>();
-//		sameEmail=userRepo.findAllByEmail(user.getEmail());
-//		List<User> sameUsername=new ArrayList<User>();
-//		sameUsername=userRepo.findAllByUsername(user.getUsername());
-//		if(sameUsername.size()>1) {
-//			throw new UserExistException("Username not available/ Already Taken");
-//		}
-//		else if(sameEmail.size()>1){
-//			throw new UserExistException("Email not available/ Already Taken");
-//		}
-//		
-//		if(newUser==null) {
-//			throw new UserNotExistException("user does not exist");
-//		}
-//		else{
-//			
-//		}
-//		User newUser1=userRepo.getById(user.getId());
-//		return newUser1;
-//	}
+	
 
 	@Override
-	public User getUser(String id) throws UserNotExistException {
-		User newUser=userRepo.getById(id);
+	public User getUser(long userId) throws UserNotExistException {
+		User newUser=userRepo.findById(userId).get();
 		if(newUser==null) {
 			throw new UserNotExistException("user does not exist");
 		}
@@ -125,6 +100,71 @@ public class UserServiceImpl implements UserService{
 				throw new UserPassNotMatchException("password incorrect");
 			}
 		}
+		return letUser;
+	}
+
+	@Override
+	public User UpdateUserUsername(User user,long userId) throws UserExistException, UsernameNotGivenException, UserNotExistException {
+		if(user.getUsername().isEmpty()||user.getUsername()=="null") {
+			throw new UsernameNotGivenException("Username or id not given");
+		}
+		List<User> allUsers=userRepo.findAllByUsername(user.getUsername());
+		if(allUsers.size()>0) {
+			throw new UserExistException("Username already Taken");
+		}
+		User letUser=userRepo.findById(userId).get();
+		if(letUser==null) {
+			throw new UserNotExistException("user not found");
+		}
+		letUser.setUsername(user.getUsername());
+		userRepo.save(letUser);
+		User newUser=userRepo.findByUsername(user.getUsername());
+		return newUser;
+	}
+
+	@Override
+	public User UpdateUserEmail(User user,long userId) throws UsernameNotGivenException, UserExistException, UserNotExistException {
+		
+		if(user.getEmail().isEmpty()||user.getEmail()=="null") {
+			throw new UsernameNotGivenException("Email or id not given");
+		}
+		List<User> allUsers=userRepo.findAllByEmail(user.getEmail());
+		if(allUsers.size()>0) {
+			throw new UserExistException("Email already Taken");
+		}
+		User letUser=userRepo.findById(userId).get();
+		if(letUser==null) {
+			throw new UserNotExistException("user not found");
+		}
+		letUser.setEmail(user.getEmail());
+		userRepo.save(letUser);
+		return letUser;
+	}
+
+	@Override
+	public User UpdateUserFname(User user,long userId) throws UserNotExistException, UsernameNotGivenException {
+		
+		if(user.getFname()=="null") {
+			throw new UsernameNotGivenException("Email or id not given");
+		}
+		User letUser=userRepo.findById(userId).get();
+		if(letUser==null) {
+			throw new UserNotExistException("user not found");
+		}
+		letUser.setFname(user.getFname());
+		return letUser;
+	}
+
+	@Override
+	public User UpdateUserLname(User user,long userId) throws UserNotExistException, UsernameNotGivenException {
+		if(user.getLname()=="null") {
+			throw new UsernameNotGivenException("Email or id not given");
+		}
+		User letUser=userRepo.findById(userId).get();
+		if(letUser==null) {
+			throw new UserNotExistException("user not found");
+		}
+		letUser.setLname(user.getLname());
 		return letUser;
 	}
 

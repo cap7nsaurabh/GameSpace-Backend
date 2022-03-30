@@ -14,9 +14,13 @@ public interface UserService {
 	
 	public List<User> getAllUsers();
 	public User saveUser(User user) throws UsernameNotGivenException, EmailNotGivenException, UserExistException, IncompleteDataException;
-	public User deleteUser(String id) throws UserNotExistException;
-	public User updateUser(User user) throws UserNotExistException, UserExistException;
-	public User getUser(String id) throws UserNotExistException;
+	public User deleteUser(long id) throws UserNotExistException;
+	//public User updateUser(User user) throws UserNotExistException, UserExistException;
+	public User getUser(long id) throws UserNotExistException;
 	public User getUserByUsernameandPasshash(String usernameorEmail, String pHash) throws UserNotExistException, UserPassNotMatchException, IncompleteDataException;
+	public User UpdateUserUsername(User user,long userId) throws UserExistException, UsernameNotGivenException, UserNotExistException;
+	public User UpdateUserEmail(User user,long userId) throws UsernameNotGivenException, UserExistException, UserNotExistException;
+	public User UpdateUserFname(User user,long userId) throws UserNotExistException, UsernameNotGivenException;
+	public User UpdateUserLname(User user,long userId) throws UserNotExistException, UsernameNotGivenException;
 
 }

@@ -10,46 +10,45 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 public class Comment {
 	 
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	private	String id;
+	
+	@Id  @GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	@Column(nullable=false) 
-	private String commentByUserid;
+	private long commentedByUserid;
 	private String commentval;
 	
 	
-	public Comment(String commentByUserid, String commentval) {
+	public Comment(long commentByUserid, String commentval) {
 		super();
-		this.commentByUserid = commentByUserid;
+		this.commentedByUserid = commentByUserid;
 		this.commentval = commentval;
 	}
 	public Comment() {
 		super();
 	}
 	
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
-	public String getCommentByUserid() {
-		return commentByUserid;
+	public long getCommentedByUserid() {
+		return commentedByUserid;
 	}
-	public void setCommentBy(String commentBy) {
-		this.commentByUserid = commentBy;
+	public void setCommentedByUserid(long commentBy) {
+		this.commentedByUserid = commentBy;
 	}
 	public String getCommentval() {
 		return commentval;
 	}
 	public void setCommentval(String commentval) {
 		this.commentval = commentval;
-	}
-	@Override
-	public String toString() {
-		return "Comment [id=" + id + ", commentBy=" + commentByUserid + ", commentval=" + commentval + "]";
 	}
 	
 }

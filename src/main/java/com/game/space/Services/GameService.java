@@ -10,8 +10,8 @@ public interface GameService {
 	
 	public List<Game> getAllGames();
 	public Game addGame(Game game)  throws GameAlreadyPresentException;
-	public Game deleteGame(String id) throws GameNotPresentException;
+	public Game deleteGame(long gameId) throws GameNotPresentException;
 	public Game updateGame(Game game)throws GameNotPresentException;
-	public Game getGameByid(String id) throws GameNotPresentException;
-	public Integer getGameRatingByid(String id) throws GameNotPresentException;
+	public Game getGameByid(long gameId) throws GameNotPresentException;
+	public Integer getGameRatingByid(long gameId) throws GameNotPresentException;
 }
