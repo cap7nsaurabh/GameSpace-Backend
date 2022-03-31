@@ -86,7 +86,7 @@ public class UserController {
 			System.out.println("789");
 			String message=e.getMessage();
 			respBody.put("message",message);
-			responseEntity = new ResponseEntity<>(respBody, HttpStatus.BAD_REQUEST);
+			responseEntity = new ResponseEntity<>(respBody, HttpStatus.NOT_FOUND);
 			System.out.println("012");
 		}
 		catch(NullPointerException|NumberFormatException e) {
