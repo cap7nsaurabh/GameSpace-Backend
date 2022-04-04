@@ -15,7 +15,7 @@ import com.game.space.Exception.IncompleteDataException;
 import com.game.space.Exception.UserNotExistException;
 import com.game.space.Exception.UserPassNotMatchException;
 import com.game.space.Model.User;
-
+import com.game.space.Services.UserService;
 import com.game.space.Services.UserServiceImpl;
 
 @RestController
@@ -24,7 +24,7 @@ public class AuthenticationController {
 	ResponseEntity<?> responseEntity;
 	User user;
 	@Autowired
-	UserServiceImpl userService;
+	UserService userService;
 	
 	@PostMapping("/login")
 	ResponseEntity<?> loginUser(@RequestBody User user ){

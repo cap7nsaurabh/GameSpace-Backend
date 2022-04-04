@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.game.space.Exception.GameAlreadyPresentException;
 import com.game.space.Exception.GameNotPresentException;
 import com.game.space.Model.Game;
+import com.game.space.Services.GameService;
 import com.game.space.Services.GameServiceImpl;
 
 @RestController
 @RequestMapping("/game")
 public class GameController {
 	@Autowired
-	GameServiceImpl gameService;
+	GameService gameService;
 	
 	ResponseEntity<?> responseEntity;
 	
